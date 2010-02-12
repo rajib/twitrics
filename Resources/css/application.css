@@ -1,0 +1,82 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  line-height: 18px;
+}
+
+/*-- Rajib Chowdhury --*/
+
+.tweetPost{
+	-webkit-box-shadow: 2px 2px 2px 2px #888;
+	-webkit-border-top-left-radius: 10px; 
+	-webkit-border-bottom-right-radius: 10px;
+	padding: 10px; 
+	margin: 15px 5px 15px 5px; 
+	background-color: #EEEEEE; 
+	width: 430px
+}
+
+.windowNavIcons
+{
+	position:absolute;
+	cursor:pointer;
+	top:10px;
+}
+
+.pointer
+{
+	cursor:pointer;
+}
+
+.statusBar {
+  background-image:url(../images/gradiants/white-top-bottom.gif);
+  border-color:#4F4A4A;
+  color:#4F4A4A;
+  font-size:11px;
+  -webkit-background-clip:border;
+  -webkit-background-inline-policy:continuous;
+  -webkit-background-origin:padding;
+  overflow:hidden;
+  padding:5px 3px 4px 5px;
+  position: fixed;
+  bottom: -15;   
+	z-index: 999999;
+	width: 100%;
+}
+
+
+#pagination {
+  margin: 5px 5px 5px 14px;
+  width: 430px
+}
+
+.more {
+  background-color:#FFFFFF;
+  background-image:url(http://s.twimg.com/a/1264550348/images/more.gif);
+  background-position:left top;
+  background-repeat:repeat-x;
+  border-color:#DDDDDD #AAAAAA #AAAAAA #DDDDDD;
+  border-style:solid;
+  border-width:1px;
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  height:22px;
+  line-height:1.5em;
+  margin-bottom:6px;
+  outline-color:-webkit-use-text-color;
+  outline-style:none;
+  outline-width:medium;
+  padding:6px 0;
+  text-align:center;
+  text-shadow:1px 1px 1px #FFFFFF;
+  width:100%;
+}
+
+.round {
+  -webkit-border-radius-bottomleft:5px;
+  -webkit-border-radius-bottomright:5px;
+  -webkit-border-radius-topleft:5px;
+  -webkit-border-radius-topright:5px;
+}

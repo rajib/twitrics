@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ti:app xmlns:ti='http://ti.appcelerator.org'>
+<!-- These values are edited/maintained by Titanium Developer -->
+<id>twitrics.rc</id>
+<name>Twitrics</name>
+<version>1.0</version>
+<publisher>rajib</publisher>
+<url>http://rajibchowdhury.tumblr.com/</url>
+<icon>twiter_01.png</icon>
+<copyright>2010 by rajib</copyright>
+<!-- Window Definition - these values can be edited -->
+<window>
+<id>initial</id>
+<title>Tweetrics 1.0(beta)</title>
+<url>app://index.html</url>
+<width>480</width>
+<height>700</height>
+<fullscreen>false</fullscreen>
+<resizable>false</resizable>
+<chrome scrollbars="true">true</chrome>
+<maximizable>true</maximizable>
+<minimizable>true</minimizable>
+<closeable>true</closeable>
+</window>
+</ti:app>

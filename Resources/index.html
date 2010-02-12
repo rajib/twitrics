@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <link href="css/blueprint/screen.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/blueprint/print.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/application.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/vistyle.css" media="screen" rel="stylesheet" type="text/css"/>
+
+    <script src="js/jquery-1.4.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.template.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.url.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/base64.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.livequery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/custom.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>    
+    <div id="logo"><img src="images/logo.png"/></div>
+    <div id="main" class="mTop10">
+      <div id="loginForm" class="span-10 mLeft45">
+        <div id="loginFormContainer">
+        	<fieldset>
+        		<legend>Sign in to Twitter</legend>
+
+        		<p><label for="username">Username or email</label><br>
+        		  <input type="text" value="rajibchowdhury" id="username" name="username" class="title"></p>
+          
+                <p><label for="password">Password</label><br>
+        		  <input type="password" value="rajib237" name="password" id="password" class="title"></p>
+
+        		<p><input type="submit" value="Submit" onclick="Twitter.login();">
+        	</fieldset>
+        </div>
+      </div>
+      
+      <div id="loggedInBlock" class="dNone">
+        <div class="ht115">
+          <form method="post" id="statusUpdateForm" action="#">
+            <strong class="mLeft20">What&rsquo;s happening?</strong>
+            <textarea tabindex="1" autocomplete="off" accesskey="u" name="status" id="statusUpdateInput"class="w440 ht50 mLeft20"></textarea><br>
+            <input type="submit" tabindex="2" class="mLeft20" id="updateSubmit" value="update" name="update" disabled="true">
+          </form>
+          <form method="post" id="replyForm" action="#" class="dNone">
+            <strong id="replyTo" class="mLeft20"></strong>
+            <textarea tabindex="1" autocomplete="off" accesskey="u" name="status" id="replyInput"class="w440 ht50 mLeft20"></textarea><br>
+            <input type="submit" tabindex="2" class="mLeft20" id="replySubmit" value="reply" name="reply">
+          </form>
+        </div>
+        <div id="statusContainer" class="ht500 ofAuto">
+        <div id="content"></div>
+          <div id="pagination">
+	          <span id="more" class="round more mBot10">more</span>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<div id="footer" class="statusBar">
+		<p class="fLeft"> &copy; 2010 Rajib L Chowdhury</p>
+		<span id="progress" class="fRight mRight20 dNone"><img src="images/ajax-loader.gif" alt="loading" /></span>
+	</div>
+    
+
+  </body>
+</html>
