@@ -67,6 +67,7 @@ Twitter = function() {
 							id: valu.id,
 							tweet_row_id: name
 						});
+						Utility.show_more_btn(json);
 						if (screen_name == valu.user.screen_name) {
 							$('#retweetOrDeleteUpdate'+valu.id).html( delico, {
 								id: valu.id
@@ -204,7 +205,13 @@ Twitter = function() {
                     profile_screen_name: profile_screen_name
                 });
                 $('#replyForm #replyInput').append(profile_screen_name);
-            }
+            },
+
+			show_more_btn: function(json){
+				if (json.length > 20){
+					$('#pagination').show();
+				}
+			}
         }
 	}();
 

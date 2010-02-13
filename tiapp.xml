@@ -18,7 +18,7 @@
 <fullscreen>false</fullscreen>
 <resizable>false</resizable>
 <chrome scrollbars="true">true</chrome>
-<maximizable>true</maximizable>
+<maximizable>false</maximizable>
 <minimizable>true</minimizable>
 <closeable>true</closeable>
 </window>
