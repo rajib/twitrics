@@ -18,6 +18,7 @@ Twitter = function() {
 		login = true;
 		$('#loginForm').hide(); //disappear login form
 		$('#loggedInBlock').show(); //show main content after login success
+		$('#loggedInButtons').show(); //show logged in buttons
 		notification_dialog("Login Success", "Logged in successfully");
 		Twitter.public_timeline();
 	}
@@ -67,7 +68,6 @@ Twitter = function() {
 							id: valu.id,
 							tweet_row_id: name
 						});
-						Utility.show_more_btn(json);
 						if (screen_name == valu.user.screen_name) {
 							$('#retweetOrDeleteUpdate'+valu.id).html( delico, {
 								id: valu.id
@@ -205,13 +205,7 @@ Twitter = function() {
                     profile_screen_name: profile_screen_name
                 });
                 $('#replyForm #replyInput').append(profile_screen_name);
-            },
-
-			show_more_btn: function(json){
-				if (json.length > 20){
-					$('#pagination').show();
-				}
-			}
+            }
         }
 	}();
 
@@ -225,16 +219,12 @@ Twitter = function() {
 			Twitter.public_timeline();
 		});
 
-		//Titanium.App.exit();
-		$('#close').click(function()
+		// refresh statushes page
+		$('#refresh').click(function()
 		{
-			Titanium.UI.currentWindow.close();
-		});
-
-		//Titanium.App.minimize();
-		$('#minimize').click(function()
-		{
-			Titanium.UI.currentWindow.move();
+		    $('#content').html('');
+			Twitter.set_page(null);
+			Twitter.public_timeline();
 		});
 
 		// Check if the status update textarea is empty or not
@@ -283,6 +273,8 @@ Twitter = function() {
 			profile_screen_name = "@"+this.id+" ";
 			Utility.show_dm_form(profile_screen_name);
 		});	
+		
+		$('img').tipsy({fade: true, gravity: 'n'});
 	});
 
 
