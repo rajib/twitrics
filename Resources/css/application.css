@@ -51,6 +51,10 @@ body, p, ol, ul, td {
   width: 430px
 }
 
+.confirmationBox{
+  font-size:10px;
+}
+
 .more {
   background-color:#FFFFFF;
   background-image:url(http://s.twimg.com/a/1264550348/images/more.gif);

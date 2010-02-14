@@ -29,6 +29,33 @@ Twitter = function() {
 		notificationDialog.setMessage(msg);
 		notificationDialog.show();
 	}
+	
+	function alter_load_content(){
+		// set tooltip style
+		$('.pointer').tipsy({fade: true, gravity: 'e'});
+		// set delete btn confirmation
+	    $('.deleteUpdate').confirm({
+            dialogShow:'fadeIn',
+            dialogSpeed:'slow',
+            wrapper:'<span class="confirmationBox"></span>',
+            msg: 'Are you sure? ',
+            buttons: {
+                wrapper:'<button></button>',
+                separator:'  '
+            } 
+        });
+        // set retweet btn confirmation
+        $('.retweetUpdate').confirm({
+            dialogShow:'fadeIn',
+            dialogSpeed:'slow',
+            wrapper:'<span class="confirmationBox"></span>',
+            msg: 'Retweet to your followers? ',
+            buttons: {
+                wrapper:'<button></button>',
+                separator:'  '
+            } 
+        });
+	}
 	return   {
 		public_timeline: function(){
 			var auth = make_basic_auth(username, password);
@@ -48,9 +75,9 @@ Twitter = function() {
 			<div class="span-11 last">\
 			</div> \
 			</div>');
-			var delico = $.template('<img id="${id}" class="deleteUpdate pointer" title="delete" src="images/icons/minus-circle-frame.png"/>');
-			var retweetico = $.template('<img id="${id}" class="retweetUpdate pointer" title="retweet" src="images/icons/arrow-repeat.png"/>');
-			var replyico = $.template('<img id="${profile_screen_name}" class="replyUpdate pointer" title="reply" src="images/icons/arrow-curve-180-left.png"/>');
+			var delico = $.template('<img id="${id}" class="deleteUpdate pointer statusBtn" title="delete" src="images/icons/minus-circle-frame.png"/>');
+			var retweetico = $.template('<img id="${id}" class="retweetUpdate pointer statusBtn" title="retweet" src="images/icons/arrow-repeat.png"/>');
+			var replyico = $.template('<img id="${profile_screen_name}" class="replyUpdate pointer statusBtn" title="reply to ${profile_screen_name}" src="images/icons/arrow-curve-180-left.png"/>');
 			$.ajax({
 				type: "GET",
 				url: url,
@@ -81,6 +108,7 @@ Twitter = function() {
 							});
 						}
 					});
+					alter_load_content();
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					notification_dialog("Error", XMLHttpRequest.responseText);
@@ -222,8 +250,9 @@ Twitter = function() {
 		// refresh statushes page
 		$('#refresh').click(function()
 		{
-		    $('#content').html('');
-			Twitter.set_page(null);
+            var page = Twitter.get_page();
+            Twitter.set_page(null);
+            $('#content').html('');
 			Twitter.public_timeline();
 		});
 
@@ -274,9 +303,7 @@ Twitter = function() {
 			Utility.show_dm_form(profile_screen_name);
 		});	
 		
-		$('img').tipsy({fade: true, gravity: 'n'});
 	});
 
-
-	setInterval("if (Twitter.logged_in()) {Twitter.periodical_public_timeline();}", 100000);
+	setInterval("if (Twitter.logged_in()) {Twitter.periodical_public_timeline();}", 500000);
 
