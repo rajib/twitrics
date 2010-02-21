@@ -20,7 +20,7 @@ Twitter = function() {
 		$('#loggedInBlock').show(); //show main content after login success
 		$('#loggedInButtons').show(); //show logged in buttons
 		notification_dialog("Login Success", "Logged in successfully");
-		Twitter.public_timeline();
+		Twitter.home_timeline();
 	}
 
 	function notification_dialog(title, msg)	{
@@ -30,7 +30,7 @@ Twitter = function() {
 		notificationDialog.show();
 	}
 	
-	function alter_load_content(){
+	function after_load_content(){
 		// set tooltip style
 		$('.pointer').tipsy({fade: true, gravity: 'e'});
 		// set delete btn confirmation
@@ -56,8 +56,21 @@ Twitter = function() {
             } 
         });
 	}
+	
+	function parse_text(text){
+	    var url_regexp = /((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi;
+        $('#mainCol h2').each(function(){
+            var thisText = $(this).text();
+            var anchorText = thisText.replace(/ /g, "-");
+            var anchorLink = '<a name="' + anchorText + '"></a>';
+            var anchorText = '<a href="#' + anchorText + '">' + thisText + '</a>';
+            $(this).before(anchorLink);
+            $(anchorText).appendTo('p.subNav');
+        });
+	    return text;
+	}
 	return   {
-		public_timeline: function(){
+		home_timeline: function(){
 			var auth = make_basic_auth(username, password);
 			var url = "http://api.twitter.com/1/statuses/home_timeline.json";
 			var tplate = $.template('\
@@ -67,7 +80,7 @@ Twitter = function() {
 			<img src="${profile_image}" alt="Profile Pic"/>\
 			</div>\
 			<div class="span-9 last">\
-			<strong>${profile_screen_name}:</strong>\
+			<a target="ti:systembrowser" href="http://twitter.com/${profile_screen_name}" title="Go to profile for ${profile_screen_name}">${profile_screen_name}</a>:\
 			${text}\
 			</div>\
 			<span id="retweetOrDeleteUpdate${id}" class="pAll10 fRight"></span>\
@@ -91,7 +104,7 @@ Twitter = function() {
 						$('#content').append( tplate, {
 							profile_image: valu.user.profile_image_url,
 							profile_screen_name: valu.user.screen_name,
-							text: valu.text,
+							text: parse_text(valu.text),
 							id: valu.id,
 							tweet_row_id: name
 						});
@@ -108,7 +121,7 @@ Twitter = function() {
 							});
 						}
 					});
-					alter_load_content();
+					after_load_content();
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					notification_dialog("Error", XMLHttpRequest.responseText);
@@ -128,7 +141,7 @@ Twitter = function() {
 					req.setRequestHeader('Authorization', auth);
 				},
 				success: function(json) {
-					Twitter.periodical_public_timeline();
+					Twitter.periodical_home_timeline();
 					$('#statusUpdateForm').resetForm();
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -148,7 +161,7 @@ Twitter = function() {
 					req.setRequestHeader('Authorization', auth);
 				},
 				success: function(json) {
-					Twitter.periodical_public_timeline();
+					Twitter.periodical_home_timeline();
 					notification_dialog("Info", "Update deleted");
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -176,12 +189,12 @@ Twitter = function() {
 			});
 		},
 
-		periodical_public_timeline: function(){
+		periodical_home_timeline: function(){
 			page = 1;
 			sinceId = $('#tweet_0 span').text();
 			$('#content').html('');
 			notification_dialog("Info", "Checking for new updates");
-			Twitter.public_timeline();
+			Twitter.home_timeline();
 		},
 
 		set_page: function(p){
@@ -244,7 +257,7 @@ Twitter = function() {
 			e.preventDefault();
 			var page = Twitter.get_page();
 			Twitter.set_page((page == null) ? 2 : page + 1);
-			Twitter.public_timeline();
+			Twitter.home_timeline();
 		});
 
 		// refresh statushes page
@@ -253,7 +266,7 @@ Twitter = function() {
             var page = Twitter.get_page();
             Twitter.set_page(null);
             $('#content').html('');
-			Twitter.public_timeline();
+			Twitter.home_timeline();
 		});
 
 		// Check if the status update textarea is empty or not
@@ -305,5 +318,5 @@ Twitter = function() {
 		
 	});
 
-	setInterval("if (Twitter.logged_in()) {Twitter.periodical_public_timeline();}", 500000);
+	setInterval("if (Twitter.logged_in()) {Twitter.periodical_home_timeline();}", 500000);
 
