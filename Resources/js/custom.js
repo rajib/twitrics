@@ -56,19 +56,15 @@ Twitter = function() {
             } 
         });
 	}
-	
-	function parse_text(text){
-	    var url_regexp = /((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi;
-        $('#mainCol h2').each(function(){
-            var thisText = $(this).text();
-            var anchorText = thisText.replace(/ /g, "-");
-            var anchorLink = '<a name="' + anchorText + '"></a>';
-            var anchorText = '<a href="#' + anchorText + '">' + thisText + '</a>';
-            $(this).before(anchorLink);
-            $(anchorText).appendTo('p.subNav');
-        });
-	    return text;
+		
+	function parse_text(tweet){
+        var uriRE = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+
+        return tweet.gsub(uriRE, function(m){
+            return '<a target="ti:systembrowser" href="' + m[0] + '">' + m[0] + '</a>';
+        })
 	}
+	
 	return   {
 		home_timeline: function(){
 			var auth = make_basic_auth(username, password);
@@ -238,7 +234,7 @@ Twitter = function() {
 	
 	Utility = function(){
         return {
-            show_dm_form: function(profile_screen_name){
+            show_reply_form: function(profile_screen_name){
                 var replyto_title = $.template('Reply to ${profile_screen_name}:');
                 $('#statusUpdateForm').hide();
                 $('#replyForm').show();
@@ -313,7 +309,7 @@ Twitter = function() {
 		
 		$('.replyUpdate').live('click', function(){
 			profile_screen_name = "@"+this.id+" ";
-			Utility.show_dm_form(profile_screen_name);
+			Utility.show_reply_form(profile_screen_name);
 		});	
 		
 	});
