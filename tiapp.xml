@@ -3,15 +3,15 @@
 <!-- These values are edited/maintained by Titanium Developer -->
 <id>twitrics.rc</id>
 <name>Twitrics</name>
-<version>1.0</version>
+<version>1.1</version>
 <publisher>rajib</publisher>
-<url>http://rajibchowdhury.tumblr.com/</url>
-<icon>twiter_01.png</icon>
+<url>estimator</url>
+<icon>default_app_logo.png</icon>
 <copyright>2010 by rajib</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>
 <id>initial</id>
-<title>Tweetrics 1.0(beta)</title>
+<title>Tweetrics 1.1(beta)</title>
 <url>app://index.html</url>
 <width>480</width>
 <height>700</height>
